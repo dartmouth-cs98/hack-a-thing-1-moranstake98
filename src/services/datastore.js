@@ -21,15 +21,15 @@ export default function onSignUp(email, username, password) {
     console.log(`Error: ${error}`);
   });
 
-  authenticator.onAuthStateChanged(() => {
-    if (username) {
-      database.ref(`users/${username.uid}`).set({
-        email,
-        username,
+  authenticator.onAuthStateChanged((user) => {
+    if (user) {
+      const userEmail = user.email;
+      database.ref(`users/${user.uid}`).set({
+        Email: userEmail,
+        Username: username,
       });
-      username.updateProfile({
-        displayName: username,
-      });
+    } else {
+      console.log('error no sign in');
     }
   });
 }
