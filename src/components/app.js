@@ -8,11 +8,6 @@ import SignIn from './signin';
 import Profile from './profile';
 import Matches from './matches';
 
-
-const FallBack = (props) => {
-  return <div>Welcome!</div>;
-};
-
 const Nav = (props) => {
   return (
     <nav>

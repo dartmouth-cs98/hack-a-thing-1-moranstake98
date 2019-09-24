@@ -19,4 +19,4 @@ Firebase authentication. For a long time. Since our idea was based on users, it 
 
 # Resources We Drew On
 
-Firebase documentation, React documentation, StackOverflow for specific issues or method functionalities.
+Firebase documentation, React documentation, StackOverflow for specific issues or method functionalities. Looked back at Lab 3 of CS52 when Firebase was being weird, but most of weirdness was linked to authentication which we hadn't done.
