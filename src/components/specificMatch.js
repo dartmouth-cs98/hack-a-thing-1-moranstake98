@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-const img = require('./heart.png');
+const img = require('../heart.png');
 
 class SpecificMatch extends Component {
   constructor(props) {
