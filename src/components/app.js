@@ -10,7 +10,7 @@ import Matches from './matches';
 
 
 const FallBack = (props) => {
-  return <div>URL Not Found</div>;
+  return <div>Welcome!</div>;
 };
 
 const Nav = (props) => {
@@ -21,7 +21,6 @@ const Nav = (props) => {
 }}
       >
         <li><NavLink to="/" exact>Home</NavLink></li>
-        <li><NavLink to="/about">About</NavLink></li>
         <li><NavLink to="/horoscope"> Horoscope</NavLink></li>
         <li><NavLink to="/profile">Profile</NavLink></li>
         <li><NavLink to="/suggested">Suggested Matches</NavLink></li>
@@ -43,7 +42,6 @@ const App = (props) => {
           <Route path="/signin" component={SignIn} />
           <Route path="/profile" component={Profile} />
           <Route component={Matches} />
-          <Route component={FallBack} />
         </Switch>
       </div>
     </Router>

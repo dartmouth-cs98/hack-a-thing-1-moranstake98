@@ -9,6 +9,7 @@ class Matches extends Component {
     super(props);
     this.state = {
       matches: ['Dav', 'Goon'],
+      currUsername: '',
     };
 
     //    this.signIn = this.signIn.bind(this);
@@ -16,18 +17,28 @@ class Matches extends Component {
 
   componentDidMount() {
   //  const uids = [];
-    const names = [];
-    firebase.database().ref('users').on('value', (snapshot) => {
-      snapshot.forEach((childSnapshot) => {
-        console.log(childSnapshot);
-        //    uids.push(childSnapshot.key);
-        names.push(childSnapshot.val().Username);
-      });
-      this.setState({
-        matches: names,
-        //    usernames: names,
-      });
+
+    firebase.auth().onAuthStateChanged((user) => {
+      if (user) {
+        this.setState({ currUsername: user.displayName });
+        const currName = user.displayName;
+        const names = [];
+        firebase.database().ref('users').on('value', (snapshot) => {
+          snapshot.forEach((childSnapshot) => {
+            console.log(childSnapshot);
+            if (childSnapshot.val().Username !== currName) {
+              names.push(childSnapshot.val().Username);
+            }
+          });
+          this.setState({
+            matches: names,
+          });
+        });
+      } else {
+        // No user is signed in.
+      }
     });
+
     console.log(this.state.matches === null);
   }
 
@@ -40,16 +51,20 @@ class Matches extends Component {
 
   render() {
     console.log(this.state.usernames);
+
     const listItems = this.state.matches.map(name =>
       <SpecificMatch name={name} />);
     if (this.state.matches === []) {
       return (
-        <div> Hi there null</div>
+        <div>No matches exist</div>
       );
     } else {
       return (
         <div>
-          {listItems}
+          <div>Welcome, {this.state.currUsername}!</div>
+          <div>
+            {listItems}
+          </div>
         </div>
       );
     }
