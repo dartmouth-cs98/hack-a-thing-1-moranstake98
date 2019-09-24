@@ -3,7 +3,7 @@ import firebase from 'firebase';
 import { onUpdateProfile } from '../services/datastore';
 
 
-class SignIn extends Component {
+class Profile extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -19,7 +19,6 @@ class SignIn extends Component {
   componentDidMount() {
     firebase.auth().onAuthStateChanged((user) => {
       if (user) {
-        console.log('have user');
         this.setState({ username: user.displayName });
       } else {
         console.log('do not have user');
@@ -98,4 +97,4 @@ class SignIn extends Component {
   }
 }
 
-export default SignIn;
+export default Profile;

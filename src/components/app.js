@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, NavLink, Switch } from 'react-router-do
 import SignUp from './signup';
 import SignIn from './signin';
 import Profile from './profile';
+import Suggested from './suggested';
 
 const FallBack = (props) => {
   return <div>URL Not Found</div>;
@@ -14,6 +15,7 @@ const Nav = (props) => {
       <ul>
         <li><NavLink to="/" exact>Home</NavLink></li>
         <li><NavLink to="/profile">Profile</NavLink></li>
+        <li><NavLink to="/suggested">Suggested Matches</NavLink></li>
         <li><NavLink to="/signup">Sign Up</NavLink></li>
         <li><NavLink to="/signin">Sign In</NavLink></li>
       </ul>
@@ -30,6 +32,7 @@ const App = (props) => {
           <Route path="/signup" component={SignUp} />
           <Route path="/signin" component={SignIn} />
           <Route path="/profile" component={Profile} />
+          <Route path="/suggested" component={Suggested} />
           <Route component={FallBack} />
         </Switch>
       </div>

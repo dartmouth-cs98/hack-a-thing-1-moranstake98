@@ -62,3 +62,10 @@ export function onUpdateProfile(gender, partner, horoscope, interest, hatred) {
     }
   });
 }
+
+export function getAllUsers(callback) {
+  database.ref('users').on('value', (snapshot) => {
+    const newState = snapshot.val();
+    callback(newState);
+  });
+}
