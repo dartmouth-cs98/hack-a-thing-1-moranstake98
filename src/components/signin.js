@@ -1,27 +1,18 @@
 import React, { Component } from 'react';
-import { onSignUp } from '../services/datastore';
+import { onSignIn } from '../services/datastore';
 
 
-class SignUp extends Component {
+class SignIn extends Component {
   constructor(props) {
     super(props);
     this.state = {
       email: '',
-      username: '',
       password: '',
     };
 
-    this.signUp = this.signUp.bind(this);
-    this.handleUsernameChange = this.handleUsernameChange.bind(this);
+    this.signIn = this.signIn.bind(this);
     this.handleEmailChange = this.handleEmailChange.bind(this);
-
     this.handlePasswordChange = this.handlePasswordChange.bind(this);
-  }
-
-  handleUsernameChange(event) {
-    this.setState({
-      username: event.target.value,
-    });
   }
 
   handleEmailChange(event) {
@@ -36,19 +27,15 @@ class SignUp extends Component {
     });
   }
 
-  signUp(event) {
+  signIn(event) {
     console.log(this.state.email);
-    onSignUp(this.state.email, this.state.username, this.state.password);
+    onSignIn(this.state.email, this.state.password);
   }
 
 
   render() {
     return (
       <div>
-        <p id="username">
-          Username:
-          <input type="text" onChange={this.handleUsernameChange} />
-        </p>
         <p id="email">
           Email:
           <input type="text" onChange={this.handleEmailChange} />
@@ -57,12 +44,12 @@ class SignUp extends Component {
           Password:
           <input type="text" onChange={this.handlePasswordChange} />
         </p>
-        <button onClick={this.signUp}>
-          sign up
+        <button onClick={this.signIn}>
+          sign in
         </button>
       </div>
     );
   }
 }
 
-export default SignUp;
+export default SignIn;

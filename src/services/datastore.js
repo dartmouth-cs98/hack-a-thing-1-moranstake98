@@ -16,7 +16,7 @@ Firebase.initializeApp(firebaseConfig);
 const database = Firebase.database();
 const authenticator = Firebase.auth();
 
-export default function onSignUp(email, username, password) {
+export function onSignUp(email, username, password) {
   authenticator.createUserWithEmailAndPassword(email, password).catch((error) => {
     console.log(`Error: ${error}`);
   });
@@ -28,8 +28,37 @@ export default function onSignUp(email, username, password) {
         Email: userEmail,
         Username: username,
       });
+      user.updateProfile({
+        displayName: username,
+      }).then(() => {
+        console.log('successfully updated display name');
+      }).catch((error) => {
+        console.log('failed to update display name');
+      });
     } else {
       console.log('error no sign in');
+    }
+  });
+}
+
+export function onSignIn(email, password) {
+  authenticator.signInWithEmailAndPassword(email, password).catch((error) => {
+    console.log('error signing in');
+  });
+}
+
+export function onUpdateProfile(gender, partner, horoscope, interest, hatred) {
+  authenticator.onAuthStateChanged((user) => {
+    if (user) {
+      database.ref(`users/${user.uid}/profile/`).set({
+        Gender: gender,
+        Partner: partner,
+        Horoscope: horoscope,
+        Interest: interest,
+        Hatred: hatred,
+      });
+    } else {
+      console.log('Error updating profile');
     }
   });
 }
