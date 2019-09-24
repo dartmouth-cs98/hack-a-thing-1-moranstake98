@@ -6,6 +6,7 @@ import '../style.scss';
 import SignUp from './signup';
 import SignIn from './signin';
 import Profile from './profile';
+import Matches from './matches';
 // const About = (props) => {
 //   return <div> All there is to know about me </div>;
 // };
@@ -17,9 +18,9 @@ const Test = (props) => {
   return <div> ID: {props.match.params.id} </div>;
 };
 
-const FallBack = (props) => {
-  return <div>URL Not Found</div>;
-};
+// const FallBack = (props) => {
+//   return <div>URL Not Found</div>;
+// };
 
 const Nav = (props) => {
   return (
@@ -49,7 +50,7 @@ const App = (props) => {
           <Route path="/signup" component={SignUp} />
           <Route path="/signin" component={SignIn} />
           <Route path="/profile" component={Profile} />
-          <Route component={FallBack} />
+          <Route component={Matches} />
         </Switch>
       </div>
     </Router>
