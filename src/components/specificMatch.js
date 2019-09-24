@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 
-
 class SpecificMatch extends Component {
   constructor(props) {
     super(props);
     this.state = { };
   }
+
 
   calculateMatchPercetage = () => {
     return Math.floor(Math.random() * 100) + 1;

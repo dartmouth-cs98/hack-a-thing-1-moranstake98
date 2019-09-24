@@ -1,5 +1,8 @@
+
+import firebase from 'firebase';
 import React, { Component } from 'react';
 import SpecificMatch from './specificMatch';
+
 
 class Matches extends Component {
   constructor(props) {
@@ -11,6 +14,23 @@ class Matches extends Component {
     //    this.signIn = this.signIn.bind(this);
   }
 
+  componentDidMount() {
+  //  const uids = [];
+    const names = [];
+    firebase.database().ref('users').on('value', (snapshot) => {
+      snapshot.forEach((childSnapshot) => {
+        console.log(childSnapshot);
+        //    uids.push(childSnapshot.key);
+        names.push(childSnapshot.val().Username);
+      });
+      this.setState({
+        matches: names,
+        //    usernames: names,
+      });
+    });
+    console.log(this.state.matches === null);
+  }
+
 
   signIn(event) {
     console.log(this.state.email);
@@ -19,13 +39,20 @@ class Matches extends Component {
 
 
   render() {
+    console.log(this.state.usernames);
     const listItems = this.state.matches.map(name =>
       <SpecificMatch name={name} />);
-    return (
-      <div>
-        {listItems}
-      </div>
-    );
+    if (this.state.matches === []) {
+      return (
+        <div> Hi there null</div>
+      );
+    } else {
+      return (
+        <div>
+          {listItems}
+        </div>
+      );
+    }
   }
 }
 
